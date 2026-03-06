@@ -1,0 +1,181 @@
+{
+  "target": "https://hccci.edu.ph",
+  "scan_time": "2026-03-05T14:24:23.218812",
+  "vulnerabilities": [
+    {
+      "category": "Security Headers",
+      "severity": "MEDIUM",
+      "description": "HSTS header missing - site vulnerable to SSL stripping attacks",
+      "details": "",
+      "timestamp": "2026-03-05T14:24:21.136304"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "MEDIUM",
+      "description": "CSP header missing - vulnerable to XSS and data injection",
+      "details": "",
+      "timestamp": "2026-03-05T14:24:21.136369"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "LOW",
+      "description": "X-XSS-Protection header missing",
+      "details": "",
+      "timestamp": "2026-03-05T14:24:21.136381"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "LOW",
+      "description": "Permissions-Policy missing - browser features not restricted",
+      "details": "",
+      "timestamp": "2026-03-05T14:24:21.136399"
+    },
+    {
+      "category": "Cookie Security",
+      "severity": "MEDIUM",
+      "description": "Cookies missing Secure flag",
+      "details": "Cookies may be transmitted over insecure connections",
+      "timestamp": "2026-03-05T14:24:22.389488"
+    },
+    {
+      "category": "Cookie Security",
+      "severity": "MEDIUM",
+      "description": "Cookies missing HttpOnly flag",
+      "details": "Cookies accessible via JavaScript, vulnerable to XSS",
+      "timestamp": "2026-03-05T14:24:22.389541"
+    }
+  ],
+  "warnings": [
+    {
+      "category": "Information Disclosure",
+      "description": "Server header reveals software: nginx/1.18.0 (Ubuntu)"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accessible without authentication: https://hccci.edu.ph/api"
+    },
+    {
+      "category": "API Security",
+      "description": "No rate limiting detected on API endpoint: https://hccci.edu.ph/api"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accessible without authentication: https://hccci.edu.ph/news_ticker/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts PUT method: https://hccci.edu.ph/news_ticker/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts DELETE method: https://hccci.edu.ph/news_ticker/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts PATCH method: https://hccci.edu.ph/news_ticker/"
+    },
+    {
+      "category": "API Security",
+      "description": "No rate limiting detected on API endpoint: https://hccci.edu.ph/news_ticker/"
+    }
+  ],
+  "info": [
+    {
+      "category": "API Discovery",
+      "description": "Found API endpoint: /api"
+    },
+    {
+      "category": "SSL/TLS",
+      "description": "Protocol: TLSv1.3"
+    },
+    {
+      "category": "SSL/TLS",
+      "description": "Cipher: TLS_AES_256_GCM_SHA384"
+    },
+    {
+      "category": "SSL/TLS",
+      "description": "TLS version TLSv1.3 is acceptable"
+    },
+    {
+      "category": "Security Headers",
+      "description": "X-Frame-Options: DENY"
+    },
+    {
+      "category": "Security Headers",
+      "description": "X-Content-Type-Options: nosniff"
+    },
+    {
+      "category": "Security Headers",
+      "description": "Referrer-Policy: same-origin"
+    },
+    {
+      "category": "XSS",
+      "description": "No forms found for testing"
+    },
+    {
+      "category": "SQL Injection",
+      "description": "No obvious SQL injection vulnerabilities detected"
+    },
+    {
+      "category": "Command Injection",
+      "description": "No obvious command injection vulnerabilities detected"
+    },
+    {
+      "category": "Directory Traversal",
+      "description": "No obvious directory traversal vulnerabilities detected"
+    },
+    {
+      "category": "Clickjacking",
+      "description": "X-Frame-Options: DENY"
+    },
+    {
+      "category": "Cookie Security",
+      "description": "Cookie attributes: csrftoken=kP72We4NG7Wl7DEPuSl1aRScSgImmrc5; expires=Thu, 04 Mar 2027 06:24:22 GMT; Max-Age=31449600;"
+    }
+  ],
+  "discovery": {
+    "urls_found": 26,
+    "api_endpoints_found": 2,
+    "forms_found": 0,
+    "js_files_found": 3,
+    "discovered_urls": [
+      "https://hccci.edu.ph/aboutHCCCI/#carouselExampleFade",
+      "https://hccci.edu.ph/faq/#pills-profile",
+      "https://hccci.edu.ph/",
+      "https://hccci.edu.ph",
+      "https://hccci.edu.ph/junior_high_school/",
+      "https://hccci.edu.ph/aboutHCCCI/#ssDiv",
+      "https://hccci.edu.ph/enrollment/",
+      "https://hccci.edu.ph/orbit_coil/",
+      "https://hccci.edu.ph/faq/#pills-home",
+      "https://hccci.edu.ph/programsofferred/#v-pills-settings",
+      "https://hccci.edu.ph/orbit_hali/",
+      "https://hccci.edu.ph/aboutHCCCI/",
+      "https://hccci.edu.ph/aboutHCCCI/#mvDiv",
+      "https://hccci.edu.ph/programsofferred/",
+      "https://hccci.edu.ph/shs_track/",
+      "https://hccci.edu.ph/grade_school/",
+      "https://hccci.edu.ph/faq/#pills-unifast",
+      "https://hccci.edu.ph/programsofferred/#carouselExampleIndicators",
+      "https://hccci.edu.ph/college_studies/",
+      "https://hccci.edu.ph/activity_calendar/",
+      "https://hccci.edu.ph/programsofferred/#senior-school",
+      "https://hccci.edu.ph/programsofferred/#grade-school",
+      "https://hccci.edu.ph/Elibrary/",
+      "https://hccci.edu.ph/programsofferred/#junior-school",
+      "https://hccci.edu.ph/paymentprocess/",
+      "https://hccci.edu.ph/faq/"
+    ],
+    "discovered_api_endpoints": [
+      "https://hccci.edu.ph/api",
+      "https://hccci.edu.ph/news_ticker/"
+    ],
+    "discovered_forms": []
+  },
+  "summary": {
+    "critical": 0,
+    "high": 0,
+    "medium": 4,
+    "low": 2
+  }
+}

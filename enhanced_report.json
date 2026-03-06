@@ -1,0 +1,232 @@
+{
+  "target": "https://hccci.edu.ph",
+  "scan_time": "2026-03-05T13:40:53.289359",
+  "vulnerabilities": [
+    {
+      "category": "Security Headers",
+      "severity": "MEDIUM",
+      "description": "HSTS header missing - site vulnerable to SSL stripping attacks",
+      "details": "",
+      "timestamp": "2026-03-05T13:40:51.061672"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "MEDIUM",
+      "description": "CSP header missing - vulnerable to XSS and data injection",
+      "details": "",
+      "timestamp": "2026-03-05T13:40:51.061739"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "LOW",
+      "description": "X-XSS-Protection header missing",
+      "details": "",
+      "timestamp": "2026-03-05T13:40:51.061751"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "LOW",
+      "description": "Permissions-Policy missing - browser features not restricted",
+      "details": "",
+      "timestamp": "2026-03-05T13:40:51.061769"
+    },
+    {
+      "category": "Cookie Security",
+      "severity": "MEDIUM",
+      "description": "Cookies missing Secure flag",
+      "details": "Cookies may be transmitted over insecure connections",
+      "timestamp": "2026-03-05T13:40:52.446350"
+    },
+    {
+      "category": "Cookie Security",
+      "severity": "MEDIUM",
+      "description": "Cookies missing HttpOnly flag",
+      "details": "Cookies accessible via JavaScript, vulnerable to XSS",
+      "timestamp": "2026-03-05T13:40:52.446393"
+    }
+  ],
+  "warnings": [
+    {
+      "category": "Information Disclosure",
+      "description": "Server header reveals software: nginx/1.18.0 (Ubuntu)"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts PUT method: https://hccci.edu.ph/api/facebook_post/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts DELETE method: https://hccci.edu.ph/api/facebook_post/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts PATCH method: https://hccci.edu.ph/api/facebook_post/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accessible without authentication: https://hccci.edu.ph/api"
+    },
+    {
+      "category": "API Security",
+      "description": "No rate limiting detected on API endpoint: https://hccci.edu.ph/api"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accessible without authentication: https://hccci.edu.ph/news_ticker/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts PUT method: https://hccci.edu.ph/news_ticker/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts DELETE method: https://hccci.edu.ph/news_ticker/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts PATCH method: https://hccci.edu.ph/news_ticker/"
+    },
+    {
+      "category": "API Security",
+      "description": "No rate limiting detected on API endpoint: https://hccci.edu.ph/news_ticker/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts PUT method: https://hccci.edu.ph/page/test-page/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts DELETE method: https://hccci.edu.ph/page/test-page/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts PATCH method: https://hccci.edu.ph/page/test-page/"
+    }
+  ],
+  "info": [
+    {
+      "category": "API Discovery",
+      "description": "Found API endpoint: /api"
+    },
+    {
+      "category": "SSL/TLS",
+      "description": "Protocol: TLSv1.3"
+    },
+    {
+      "category": "SSL/TLS",
+      "description": "Cipher: TLS_AES_256_GCM_SHA384"
+    },
+    {
+      "category": "SSL/TLS",
+      "description": "TLS version TLSv1.3 is acceptable"
+    },
+    {
+      "category": "Security Headers",
+      "description": "X-Frame-Options: DENY"
+    },
+    {
+      "category": "Security Headers",
+      "description": "X-Content-Type-Options: nosniff"
+    },
+    {
+      "category": "Security Headers",
+      "description": "Referrer-Policy: same-origin"
+    },
+    {
+      "category": "XSS",
+      "description": "No forms found for testing"
+    },
+    {
+      "category": "SQL Injection",
+      "description": "No obvious SQL injection vulnerabilities detected"
+    },
+    {
+      "category": "Command Injection",
+      "description": "No obvious command injection vulnerabilities detected"
+    },
+    {
+      "category": "Directory Traversal",
+      "description": "No obvious directory traversal vulnerabilities detected"
+    },
+    {
+      "category": "Clickjacking",
+      "description": "X-Frame-Options: DENY"
+    },
+    {
+      "category": "Cookie Security",
+      "description": "Cookie attributes: csrftoken=Udygtwo78XNq6nzoqadoBWtyOdvGBGQG; expires=Thu, 04 Mar 2027 05:40:52 GMT; Max-Age=31449600;"
+    }
+  ],
+  "discovery": {
+    "urls_found": 50,
+    "api_endpoints_found": 5,
+    "forms_found": 0,
+    "js_files_found": 3,
+    "discovered_urls": [
+      "https://hccci.edu.ph/page/expanding-global-learning-hccci-marks-success-on-free-international-masterclass-on-medicinal-plants-and-modern-healthcare/",
+      "https://hccci.edu.ph/page/hccci-criminology-students-render-honor-service-during-bs-agriculture-pinning-ceremony/",
+      "https://hccci.edu.ph/page/bridging-opportunities-owwa-xii-and-hccci-preps-for-future-collaboration/",
+      "https://hccci.edu.ph/page/book-lovers-club-training-camp-2026-a-night-of-creativity-camaraderie-and-inspiration/",
+      "https://hccci.edu.ph/page/five-years-of-dedicated-service-mark-laurence-j-fano-lpt-malt-chra-receives-peac-plaque-of-appreciation/",
+      "https://hccci.edu.ph/page/excellence-recognized-hccci-wins-judges-award-in-vex-robotics-championship-1/",
+      "https://hccci.edu.ph/page/forging-protectors-hccci-criminologys-reveille-builds-strength-and-discipline/",
+      "https://hccci.edu.ph/page/hccci-boosts-student-wellness-with-free-semestral-health-and-dental-check-up/",
+      "https://hccci.edu.ph/programsofferred/",
+      "https://hccci.edu.ph/page/hccci-strengthens-support-for-the-local-water-alliances-climate-agenda/",
+      "https://hccci.edu.ph/grade_school/",
+      "https://hccci.edu.ph/faq/#pills-unifast",
+      "https://hccci.edu.ph/page/comsoc-days-2026-empowering-innovation-through-code-creativity-and-collaboration/",
+      "https://hccci.edu.ph/enrollment/",
+      "https://hccci.edu.ph/aboutHCCCI/",
+      "https://hccci.edu.ph/page/celebrating-excellence-and-character-hccci-3rd-quarter-convocation-day/",
+      "https://hccci.edu.ph/faq/#pills-profile",
+      "https://hccci.edu.ph/page/hccci-supports-circular-economy-through-the-eu-ph-green-economy-project/",
+      "https://hccci.edu.ph/college_studies/",
+      "https://hccci.edu.ph/orbit_hali/",
+      "https://hccci.edu.ph/page/holy-child-central-colleges-inc-strengthens-research-presence-at-scsc-in-house-review-2026/",
+      "https://hccci.edu.ph/page/hccci-marks-national-anti-hazing-prevention-week-2026-art-speaks-holinians-stand/",
+      "https://hccci.edu.ph/page/nurturing-purposeful-dreams-hccci-kinder-career-day-promotes-early-career-awareness-and-social-responsibility-1/",
+      "https://hccci.edu.ph/page/growing-in-global-standing-hccci-reflected-in-the-ad-scientific-index-2026/",
+      "https://hccci.edu.ph/faq/",
+      "https://hccci.edu.ph/page/a-commitment-to-truth-juliet-arrellano-castanas-maed-serves-to-judge-rspc-2026/",
+      "https://hccci.edu.ph/",
+      "https://hccci.edu.ph/news-updates/",
+      "https://hccci.edu.ph/paymentprocess/",
+      "https://hccci.edu.ph/page/banko-caravan-at-hccci-strengthens-financial-literacy-and-advances-sustainable-development-goals/",
+      "https://hccci.edu.ph/aboutHCCCI/#ssDiv",
+      "https://hccci.edu.ph",
+      "https://hccci.edu.ph/sdg/",
+      "https://hccci.edu.ph/activity_calendar/",
+      "https://hccci.edu.ph/orbit_coil/",
+      "https://hccci.edu.ph/junior_high_school/",
+      "https://hccci.edu.ph/page/hccci-criminology-students-render-honor-service-at-the-62nd-parochial-fiesta/",
+      "https://hccci.edu.ph/shs_track/",
+      "https://hccci.edu.ph/page/hccci-unites-for-life-61-bags-of-blood-donated-in-campus-drive-blood-letting-activity/",
+      "https://hccci.edu.ph/page/learning-beyond-the-classroom-kindergarten-pupils-participate-in-lakbay-aral-lakbay-bulilit/",
+      "https://hccci.edu.ph/page/stem-12-students-reveal-the-invisible-dna-spotted-in-banana-tomato-and-mango/",
+      "https://hccci.edu.ph/page/a-day-with-books-and-smiles-lakbay-bulilit-visits-hccci-library/",
+      "https://hccci.edu.ph/page/art-passion-and-excellence-hccci-participates-in-national-art-camp-2026/",
+      "https://hccci.edu.ph/Elibrary/",
+      "https://hccci.edu.ph/page/functional-literacy-in-focus-hccci-strengthens-reading-and-comprehension-through-book-nook-in-support-of-cheds-literacy-initiative/",
+      "https://hccci.edu.ph/aboutHCCCI/#mvDiv",
+      "https://hccci.edu.ph/page/young-innovators-in-robotics-hccci-basic-education-robotics-team-pays-a-courtesy-visit-to-surallah-mayor-hon-pedro-s-matinong-jr/",
+      "https://hccci.edu.ph/page/smiles-shared-hope-extended-hccci-leads-alay-ngiti-outreach-in-surallah/",
+      "https://hccci.edu.ph/faq/#pills-home",
+      "https://hccci.edu.ph/page/holy-child-central-colleges-academic-director-conferred-as-founding-fellow-of-fapa-advances-regional-healthcare-and-education/"
+    ],
+    "discovered_api_endpoints": [
+      "https://hccci.edu.ph/api/facebook_post/",
+      "https://hccci.edu.ph/api",
+      "https://hccci.edu.ph/news_ticker/",
+      "https://hccci.edu.ph/page/test-page/",
+      "https://hccci.edu.ph/api/facebook_post_rescrape/"
+    ],
+    "discovered_forms": []
+  },
+  "summary": {
+    "critical": 0,
+    "high": 0,
+    "medium": 4,
+    "low": 2
+  }
+}

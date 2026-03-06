@@ -1,0 +1,220 @@
+{
+  "target": "https://sncfi.edu.ph",
+  "scan_time": "2026-03-05T15:15:09.041442",
+  "vulnerabilities": [
+    {
+      "category": "Security Headers",
+      "severity": "MEDIUM",
+      "description": "HSTS header missing - site vulnerable to SSL stripping attacks",
+      "details": "",
+      "timestamp": "2026-03-05T15:13:31.115018"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "MEDIUM",
+      "description": "CSP header missing - vulnerable to XSS and data injection",
+      "details": "",
+      "timestamp": "2026-03-05T15:13:31.115111"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "LOW",
+      "description": "X-XSS-Protection header missing",
+      "details": "",
+      "timestamp": "2026-03-05T15:13:31.115129"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "LOW",
+      "description": "Permissions-Policy missing - browser features not restricted",
+      "details": "",
+      "timestamp": "2026-03-05T15:13:31.115152"
+    }
+  ],
+  "warnings": [
+    {
+      "category": "Information Disclosure",
+      "description": "Server header reveals software: nginx/1.18.0 (Ubuntu)"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accessible without authentication: https://sncfi.edu.ph/news/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts PUT method: https://sncfi.edu.ph/news/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts DELETE method: https://sncfi.edu.ph/news/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts PATCH method: https://sncfi.edu.ph/news/"
+    },
+    {
+      "category": "API Security",
+      "description": "No rate limiting detected on API endpoint: https://sncfi.edu.ph/news/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts PUT method: https://sncfi.edu.ph/api/facebook_post/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts DELETE method: https://sncfi.edu.ph/api/facebook_post/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts PATCH method: https://sncfi.edu.ph/api/facebook_post/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accessible without authentication: https://sncfi.edu.ph/api"
+    },
+    {
+      "category": "API Security",
+      "description": "No rate limiting detected on API endpoint: https://sncfi.edu.ph/api"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts PUT method: https://sncfi.edu.ph/page/test-page/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts DELETE method: https://sncfi.edu.ph/page/test-page/"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts PATCH method: https://sncfi.edu.ph/page/test-page/"
+    }
+  ],
+  "info": [
+    {
+      "category": "API Discovery",
+      "description": "Found API endpoint: /api"
+    },
+    {
+      "category": "SSL/TLS",
+      "description": "Protocol: TLSv1.3"
+    },
+    {
+      "category": "SSL/TLS",
+      "description": "Cipher: TLS_AES_256_GCM_SHA384"
+    },
+    {
+      "category": "SSL/TLS",
+      "description": "TLS version TLSv1.3 is acceptable"
+    },
+    {
+      "category": "Security Headers",
+      "description": "X-Frame-Options: DENY"
+    },
+    {
+      "category": "Security Headers",
+      "description": "X-Content-Type-Options: nosniff"
+    },
+    {
+      "category": "Security Headers",
+      "description": "Referrer-Policy: same-origin"
+    },
+    {
+      "category": "XSS",
+      "description": "No forms found for testing"
+    },
+    {
+      "category": "SQL Injection",
+      "description": "No obvious SQL injection vulnerabilities detected"
+    },
+    {
+      "category": "Command Injection",
+      "description": "No obvious command injection vulnerabilities detected"
+    },
+    {
+      "category": "Directory Traversal",
+      "description": "No obvious directory traversal vulnerabilities detected"
+    },
+    {
+      "category": "Clickjacking",
+      "description": "X-Frame-Options: DENY"
+    }
+  ],
+  "discovery": {
+    "urls_found": 50,
+    "api_endpoints_found": 5,
+    "forms_found": 1,
+    "js_files_found": 4,
+    "discovered_urls": [
+      "https://sncfi.edu.ph/sdg/goals/01/",
+      "https://sncfi.edu.ph/page/bs-criminology-students-mark-milestone-in-pinning-ceremony-and-donning-of-ranks/",
+      "https://sncfi.edu.ph/",
+      "https://sncfi.edu.ph/college_course/1/",
+      "https://sncfi.edu.ph/sdg/goals/15/",
+      "https://sncfi.edu.ph/sdg/goals/16/",
+      "https://sncfi.edu.ph/page/college-of-business-studies-and-college-of-computer-studies-hold-pinning-ceremony-for-bsoa-bsais-and-bsis-students/",
+      "https://sncfi.edu.ph/page/beced-program-holds-2nd-pinning-ceremony-celebrates-future-early-childhood-educators/",
+      "https://sncfi.edu.ph/enrollment/",
+      "https://sncfi.edu.ph/sdg/goals/11/",
+      "https://sncfi.edu.ph/sdg/goals/17/",
+      "https://sncfi.edu.ph/about/",
+      "https://sncfi.edu.ph/about/#why-choose-section",
+      "https://sncfi.edu.ph/page/bsis-students-make-waves-in-community-pageants-and-tech-innovation/",
+      "https://sncfi.edu.ph/page/sncfibeced-holds-mock-board-examination-to-select-official-representatives-for-pafte-quiz-bee/",
+      "https://sncfi.edu.ph/sdg/goals/08/",
+      "https://sncfi.edu.ph",
+      "https://sncfi.edu.ph/sdg/goals/05/",
+      "https://sncfi.edu.ph/sdg/goals/12/",
+      "https://sncfi.edu.ph/sdg/goals/10/",
+      "https://sncfi.edu.ph/sdg/",
+      "https://sncfi.edu.ph/contact/",
+      "https://sncfi.edu.ph/page/sncfi-marks-anti-hazing-week-2026-with-unified-call-for-safe-and-respectful-organizations/",
+      "https://sncfi.edu.ph/page/sncfi-participates-in-region-xii-roadshow-on-national-labor-market-development-plan/",
+      "https://sncfi.edu.ph/admissions/",
+      "https://sncfi.edu.ph/page/sncfi-successfully-concludes-ched-program-monitoring-and-evaluation/",
+      "https://sncfi.edu.ph/admissions/#admission-process",
+      "https://sncfi.edu.ph/sdg/goals/04/",
+      "https://sncfi.edu.ph/page/sncfi-hosts-is-seminar-2026-in-partnership-with-dict-region-xii/",
+      "https://sncfi.edu.ph/faq/",
+      "https://sncfi.edu.ph/page/sncfi-strengthens-career-awareness-among-lapuz-nhs-learners/",
+      "https://sncfi.edu.ph/sdg/goals/09/",
+      "https://sncfi.edu.ph/page/when-future-teachers-take-the-lead-sncfis-first-early-inclusive-education-day/",
+      "https://sncfi.edu.ph/about/#mission-vision-section",
+      "https://sncfi.edu.ph/sdg/goals/13/",
+      "https://sncfi.edu.ph/page/sncfis-beced-program-champions-inclusive-education-through-outreach-and-strategic-partnership/",
+      "https://sncfi.edu.ph/sdg/goals/06/",
+      "https://sncfi.edu.ph/sdg/goals/07/",
+      "https://sncfi.edu.ph/sdg/goals/02/",
+      "https://sncfi.edu.ph/page/sncfi-takes-leading-role-as-one-of-chedro-xiis-15-host-heis-in-the-18-day-campaign-to-end-violence-against-women-1/",
+      "https://sncfi.edu.ph/sdg/goals/14/",
+      "https://sncfi.edu.ph/admissions/#requirements",
+      "https://sncfi.edu.ph/sdg/goals/03/",
+      "https://sncfi.edu.ph/college_studies/",
+      "https://sncfi.edu.ph/news-updates/",
+      "https://sncfi.edu.ph/page/technology-and-integrity-sncfi-bsis-anchors-fair-judging-at-norhigh-2026/",
+      "https://sncfi.edu.ph/page/academic-leadership-in-action-dr-badie-serves-as-rspc-2026-judge/",
+      "https://sncfi.edu.ph/page/sncfi-beced-third-year-students-gain-firsthand-learning-experience-through-observational-visit-to-ncdcsurallah/",
+      "https://sncfi.edu.ph/page/sncfi-participates-in-pasundayag-festival-2026-grand-opening-parade-in-banga-south-cotabato/",
+      "https://sncfi.edu.ph/page/sncfi-strengthens-its-commitment-to-criminology-excellence-at-pcap-constitutional-convention/"
+    ],
+    "discovered_api_endpoints": [
+      "https://sncfi.edu.ph/news/",
+      "https://sncfi.edu.ph/api/facebook_post/",
+      "https://sncfi.edu.ph/api/facebook_post_rescrape/",
+      "https://sncfi.edu.ph/api",
+      "https://sncfi.edu.ph/page/test-page/"
+    ],
+    "discovered_forms": [
+      {
+        "action": "https://sncfi.edu.ph/contact/",
+        "method": "GET",
+        "inputs": []
+      }
+    ]
+  },
+  "summary": {
+    "critical": 0,
+    "high": 0,
+    "medium": 2,
+    "low": 2
+  }
+}

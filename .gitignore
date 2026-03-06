@@ -1,0 +1,41 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+*.log
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Selenium outputs
+rms_test_results/
+audit_results/
+ui_debug/
+screenshots/
+
+# Recorder outputs
+ui_pattern.json
+
+# Node / frontend (if any future use)
+node_modules/
+dist/
+build/
+
+# Coverage / test
+.coverage
+htmlcov/
+.pytest_cache/

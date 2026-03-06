@@ -1,0 +1,235 @@
+{
+  "target": "https://classedge.hccci.edu.ph",
+  "scan_time": "2026-03-05T15:01:34.581819",
+  "vulnerabilities": [
+    {
+      "category": "Security Headers",
+      "severity": "MEDIUM",
+      "description": "HSTS header missing - site vulnerable to SSL stripping attacks",
+      "details": "",
+      "timestamp": "2026-03-05T15:01:32.447114"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "MEDIUM",
+      "description": "CSP header missing - vulnerable to XSS and data injection",
+      "details": "",
+      "timestamp": "2026-03-05T15:01:32.447205"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "LOW",
+      "description": "X-XSS-Protection header missing",
+      "details": "",
+      "timestamp": "2026-03-05T15:01:32.447219"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "LOW",
+      "description": "Permissions-Policy missing - browser features not restricted",
+      "details": "",
+      "timestamp": "2026-03-05T15:01:32.447242"
+    },
+    {
+      "category": "CORS",
+      "severity": "HIGH",
+      "description": "CORS reflects arbitrary origins",
+      "details": "Server reflects the Origin header without validation",
+      "timestamp": "2026-03-05T15:01:33.411044"
+    },
+    {
+      "category": "CORS",
+      "severity": "CRITICAL",
+      "description": "CORS misconfiguration with credentials",
+      "details": "Allows credentials with overly permissive origins",
+      "timestamp": "2026-03-05T15:01:33.411096"
+    },
+    {
+      "category": "Cookie Security",
+      "severity": "MEDIUM",
+      "description": "Cookies missing Secure flag",
+      "details": "Cookies may be transmitted over insecure connections",
+      "timestamp": "2026-03-05T15:01:33.440243"
+    },
+    {
+      "category": "Cookie Security",
+      "severity": "MEDIUM",
+      "description": "Cookies missing HttpOnly flag",
+      "details": "Cookies accessible via JavaScript, vulnerable to XSS",
+      "timestamp": "2026-03-05T15:01:33.440285"
+    }
+  ],
+  "warnings": [
+    {
+      "category": "Information Disclosure",
+      "description": "Server header reveals software: nginx/1.24.0 (Ubuntu)"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accessible without authentication: https://classedge.hccci.edu.ph/api"
+    },
+    {
+      "category": "API Security",
+      "description": "No rate limiting detected on API endpoint: https://classedge.hccci.edu.ph/api"
+    }
+  ],
+  "info": [
+    {
+      "category": "API Discovery",
+      "description": "Found API endpoint: /api"
+    },
+    {
+      "category": "SSL/TLS",
+      "description": "Protocol: TLSv1.3"
+    },
+    {
+      "category": "SSL/TLS",
+      "description": "Cipher: TLS_AES_256_GCM_SHA384"
+    },
+    {
+      "category": "SSL/TLS",
+      "description": "TLS version TLSv1.3 is acceptable"
+    },
+    {
+      "category": "Security Headers",
+      "description": "X-Frame-Options: SAMEORIGIN"
+    },
+    {
+      "category": "Security Headers",
+      "description": "X-Content-Type-Options: nosniff"
+    },
+    {
+      "category": "Security Headers",
+      "description": "Referrer-Policy: same-origin"
+    },
+    {
+      "category": "SQL Injection",
+      "description": "No obvious SQL injection vulnerabilities detected"
+    },
+    {
+      "category": "Command Injection",
+      "description": "No obvious command injection vulnerabilities detected"
+    },
+    {
+      "category": "Directory Traversal",
+      "description": "No obvious directory traversal vulnerabilities detected"
+    },
+    {
+      "category": "CSRF",
+      "description": "Forms appear to have CSRF protection"
+    },
+    {
+      "category": "Clickjacking",
+      "description": "X-Frame-Options: SAMEORIGIN"
+    },
+    {
+      "category": "Cookie Security",
+      "description": "Cookie attributes: csrftoken=EnWuKHtpcqLNyHJMP4yelkHYABCZgjmX; expires=Thu, 04 Mar 2027 07:01:33 GMT; Max-Age=31449600;"
+    }
+  ],
+  "discovery": {
+    "urls_found": 5,
+    "api_endpoints_found": 3,
+    "forms_found": 4,
+    "js_files_found": 13,
+    "discovered_urls": [
+      "https://classedge.hccci.edu.ph/otp-reset/",
+      "https://classedge.hccci.edu.ph/setup_password/",
+      "https://classedge.hccci.edu.ph/accounts/microsoft/login/",
+      "https://classedge.hccci.edu.ph/",
+      "https://classedge.hccci.edu.ph"
+    ],
+    "discovered_api_endpoints": [
+      "https://classedge.hccci.edu.ph/common/handlers/watson",
+      "https://classedge.hccci.edu.ph/api",
+      "https://classedge.hccci.edu.ph/common/handlers/enverror"
+    ],
+    "discovered_forms": [
+      {
+        "action": "https://classedge.hccci.edu.ph/",
+        "method": "POST",
+        "inputs": [
+          {
+            "name": "csrfmiddlewaretoken",
+            "type": "hidden",
+            "value": "GjQOfssH8IZka4ACQiP6CKKkvi19LFV7awC8PZLWaYAXyB9evcdaNUh8VJtYRO7U"
+          },
+          {
+            "name": "email",
+            "type": "email",
+            "value": ""
+          },
+          {
+            "name": "password",
+            "type": "password",
+            "value": ""
+          }
+        ]
+      },
+      {
+        "action": "https://classedge.hccci.edu.ph/",
+        "method": "POST",
+        "inputs": [
+          {
+            "name": "csrfmiddlewaretoken",
+            "type": "hidden",
+            "value": "Bx4ddrqWl3FWvc6QBeo5fkXuAPoYzpDZ5KQxNYJbnjgzTJFsg8M9quui0gQNFyPM"
+          },
+          {
+            "name": "email",
+            "type": "email",
+            "value": ""
+          },
+          {
+            "name": "password",
+            "type": "password",
+            "value": ""
+          }
+        ]
+      },
+      {
+        "action": "https://classedge.hccci.edu.ph/setup_password/",
+        "method": "POST",
+        "inputs": [
+          {
+            "name": "csrfmiddlewaretoken",
+            "type": "hidden",
+            "value": "aY1Lb6OEdrnSSO0SZRkuCqczpHM0GQl9EbN5LD7TfHYvglzuELIyNAJnP8ePMZxW"
+          },
+          {
+            "name": "email",
+            "type": "email",
+            "value": ""
+          },
+          {
+            "name": "id_number",
+            "type": "text",
+            "value": ""
+          }
+        ]
+      },
+      {
+        "action": "https://classedge.hccci.edu.ph/otp-reset/",
+        "method": "POST",
+        "inputs": [
+          {
+            "name": "csrfmiddlewaretoken",
+            "type": "hidden",
+            "value": "cu9BqWMPZ2WMWHTTgqRONXqo2Ll7upoNGHVV0t541ixpkesvVkfSY7XcscNWAyAA"
+          },
+          {
+            "name": "email",
+            "type": "email",
+            "value": ""
+          }
+        ]
+      }
+    ]
+  },
+  "summary": {
+    "critical": 1,
+    "high": 1,
+    "medium": 4,
+    "low": 2
+  }
+}

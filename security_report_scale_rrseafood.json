@@ -1,0 +1,312 @@
+{
+  "target": "https://scale.rrseafood.com.ph",
+  "scan_time": "2026-03-05T15:22:39.695672",
+  "vulnerabilities": [
+    {
+      "category": "Security Headers",
+      "severity": "MEDIUM",
+      "description": "HSTS header missing - site vulnerable to SSL stripping attacks",
+      "details": "",
+      "timestamp": "2026-03-05T15:22:39.380984"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "MEDIUM",
+      "description": "X-Frame-Options missing - vulnerable to clickjacking",
+      "details": "",
+      "timestamp": "2026-03-05T15:22:39.381018"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "LOW",
+      "description": "X-Content-Type-Options missing - vulnerable to MIME sniffing",
+      "details": "",
+      "timestamp": "2026-03-05T15:22:39.381036"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "MEDIUM",
+      "description": "CSP header missing - vulnerable to XSS and data injection",
+      "details": "",
+      "timestamp": "2026-03-05T15:22:39.381052"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "LOW",
+      "description": "X-XSS-Protection header missing",
+      "details": "",
+      "timestamp": "2026-03-05T15:22:39.381091"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "LOW",
+      "description": "Referrer-Policy missing - may leak sensitive information",
+      "details": "",
+      "timestamp": "2026-03-05T15:22:39.381119"
+    },
+    {
+      "category": "Security Headers",
+      "severity": "LOW",
+      "description": "Permissions-Policy missing - browser features not restricted",
+      "details": "",
+      "timestamp": "2026-03-05T15:22:39.381146"
+    },
+    {
+      "category": "Clickjacking",
+      "severity": "MEDIUM",
+      "description": "No clickjacking protection detected",
+      "details": "Missing X-Frame-Options or CSP frame-ancestors directive",
+      "timestamp": "2026-03-05T15:22:39.418046"
+    },
+    {
+      "category": "Information Disclosure",
+      "severity": "HIGH",
+      "description": "Sensitive file accessible: /.git/config",
+      "details": "Status code: 200",
+      "timestamp": "2026-03-05T15:22:39.419691"
+    },
+    {
+      "category": "Information Disclosure",
+      "severity": "HIGH",
+      "description": "Sensitive file accessible: /.env",
+      "details": "Status code: 200",
+      "timestamp": "2026-03-05T15:22:39.421376"
+    },
+    {
+      "category": "Information Disclosure",
+      "severity": "HIGH",
+      "description": "Sensitive file accessible: /config.php",
+      "details": "Status code: 200",
+      "timestamp": "2026-03-05T15:22:39.423053"
+    }
+  ],
+  "warnings": [
+    {
+      "category": "Information Disclosure",
+      "description": "Server header reveals software: nginx/1.24.0 (Ubuntu)"
+    },
+    {
+      "category": "Information Disclosure",
+      "description": "Potentially sensitive file accessible: /phpinfo.php"
+    },
+    {
+      "category": "Information Disclosure",
+      "description": "Potentially sensitive file accessible: /info.php"
+    },
+    {
+      "category": "Information Disclosure",
+      "description": "Potentially sensitive file accessible: /.DS_Store"
+    },
+    {
+      "category": "Information Disclosure",
+      "description": "Potentially sensitive file accessible: /web.config"
+    },
+    {
+      "category": "Information Disclosure",
+      "description": "Potentially sensitive file accessible: /composer.json"
+    },
+    {
+      "category": "Information Disclosure",
+      "description": "Potentially sensitive file accessible: /package.json"
+    },
+    {
+      "category": "Information Disclosure",
+      "description": "Potentially sensitive file accessible: /robots.txt"
+    },
+    {
+      "category": "Information Disclosure",
+      "description": "Potentially sensitive file accessible: /.htaccess"
+    },
+    {
+      "category": "Information Disclosure",
+      "description": "Potentially sensitive file accessible: /sitemap.xml"
+    },
+    {
+      "category": "Information Disclosure",
+      "description": "Potentially sensitive file accessible: /README.md"
+    },
+    {
+      "category": "Information Disclosure",
+      "description": "Potentially sensitive file accessible: /CHANGELOG.md"
+    },
+    {
+      "category": "API Security",
+      "description": "No rate limiting detected on API endpoint: https://scale.rrseafood.com.ph/employees"
+    },
+    {
+      "category": "API Security",
+      "description": "No rate limiting detected on API endpoint: https://scale.rrseafood.com.ph/product-prices"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts PUT method: https://scale.rrseafood.com.ph/api/categories/__VAR__"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts DELETE method: https://scale.rrseafood.com.ph/api/categories/__VAR__"
+    },
+    {
+      "category": "API Security",
+      "description": "No rate limiting detected on API endpoint: https://scale.rrseafood.com.ph/reports/comparison/period"
+    },
+    {
+      "category": "API Security",
+      "description": "No rate limiting detected on API endpoint: https://scale.rrseafood.com.ph/scanner/qr/"
+    },
+    {
+      "category": "API Security",
+      "description": "No rate limiting detected on API endpoint: https://scale.rrseafood.com.ph/classifications"
+    },
+    {
+      "category": "API Security",
+      "description": "API endpoint accepts PUT method: https://scale.rrseafood.com.ph/api/payroll/__VAR__/status"
+    },
+    {
+      "category": "API Security",
+      "description": "No rate limiting detected on API endpoint: https://scale.rrseafood.com.ph/reports/comparison/employee/"
+    },
+    {
+      "category": "API Security",
+      "description": "No rate limiting detected on API endpoint: https://scale.rrseafood.com.ph/payroll/pay-all?start_date="
+    }
+  ],
+  "info": [
+    {
+      "category": "SSL/TLS",
+      "description": "Protocol: TLSv1.3"
+    },
+    {
+      "category": "SSL/TLS",
+      "description": "Cipher: TLS_AES_256_GCM_SHA384"
+    },
+    {
+      "category": "SSL/TLS",
+      "description": "TLS version TLSv1.3 is acceptable"
+    },
+    {
+      "category": "XSS",
+      "description": "No forms found for testing"
+    },
+    {
+      "category": "SQL Injection",
+      "description": "No obvious SQL injection vulnerabilities detected"
+    },
+    {
+      "category": "Command Injection",
+      "description": "No obvious command injection vulnerabilities detected"
+    },
+    {
+      "category": "Directory Traversal",
+      "description": "No obvious directory traversal vulnerabilities detected"
+    }
+  ],
+  "discovery": {
+    "urls_found": 1,
+    "api_endpoints_found": 91,
+    "forms_found": 0,
+    "js_files_found": 1,
+    "discovered_urls": [
+      "https://scale.rrseafood.com.ph"
+    ],
+    "discovered_api_endpoints": [
+      "https://scale.rrseafood.com.ph/employees",
+      "https://scale.rrseafood.com.ph/api/scanner/qr/__VAR__",
+      "https://scale.rrseafood.com.ph/product-prices",
+      "https://scale.rrseafood.com.ph/api/categories/__VAR__",
+      "https://scale.rrseafood.com.ph/reports/comparison/period",
+      "https://scale.rrseafood.com.ph/scanner/qr/",
+      "https://scale.rrseafood.com.ph/classifications",
+      "https://scale.rrseafood.com.ph/api/dashboard/breakdown",
+      "https://scale.rrseafood.com.ph/api/classifications",
+      "https://scale.rrseafood.com.ph/api/export/reports/category",
+      "https://scale.rrseafood.com.ph/api/payroll/__VAR__/status",
+      "https://scale.rrseafood.com.ph/api/export/payroll/excel",
+      "https://scale.rrseafood.com.ph/reports/comparison/employee/",
+      "https://scale.rrseafood.com.ph/api/export/reports/paid-payroll",
+      "https://scale.rrseafood.com.ph/payroll/pay-all?start_date=",
+      "https://scale.rrseafood.com.ph/reports/comparison/station",
+      "https://scale.rrseafood.com.ph/export/reports/station",
+      "https://scale.rrseafood.com.ph/api/reports/comparison/employee/__VAR__",
+      "https://scale.rrseafood.com.ph/api/export/performance/pdf",
+      "https://scale.rrseafood.com.ph/api/scanner/session",
+      "https://scale.rrseafood.com.ph/export/reports/period",
+      "https://scale.rrseafood.com.ph/api/scanner/session/__VAR__/reset",
+      "https://scale.rrseafood.com.ph/scale/read",
+      "https://scale.rrseafood.com.ph/export/performance/pdf",
+      "https://scale.rrseafood.com.ph/export/reports/employee/",
+      "https://scale.rrseafood.com.ph/api/dashboard/stats",
+      "https://scale.rrseafood.com.ph/api/payroll/calculate",
+      "https://scale.rrseafood.com.ph/dashboard/stats",
+      "https://scale.rrseafood.com.ph/dashboard/breakdown",
+      "https://scale.rrseafood.com.ph/scale/configure",
+      "https://scale.rrseafood.com.ph/auth/register",
+      "https://scale.rrseafood.com.ph/api/scale/configure",
+      "https://scale.rrseafood.com.ph/api/stations/__VAR__/stats",
+      "https://scale.rrseafood.com.ph/export/reports/category",
+      "https://scale.rrseafood.com.ph/api/export/reports/employee/__VAR__",
+      "https://scale.rrseafood.com.ph/api/auth/login",
+      "https://scale.rrseafood.com.ph/api/employees",
+      "https://scale.rrseafood.com.ph/products",
+      "https://scale.rrseafood.com.ph/api/export/reports/period",
+      "https://scale.rrseafood.com.ph/api/payroll/calculate-by-product?start_date=__VAR__&end_date=__VAR__",
+      "https://scale.rrseafood.com.ph/scale/status",
+      "https://scale.rrseafood.com.ph/api/scale/status",
+      "https://scale.rrseafood.com.ph/api/scale/simulate/__VAR__",
+      "https://scale.rrseafood.com.ph/scale/test",
+      "https://scale.rrseafood.com.ph/api/reports/comparison/period",
+      "https://scale.rrseafood.com.ph/export/reports/paid-payroll",
+      "https://scale.rrseafood.com.ph/scanner/session",
+      "https://scale.rrseafood.com.ph/api/product-prices/__VAR__",
+      "https://scale.rrseafood.com.ph/api/payroll",
+      "https://scale.rrseafood.com.ph/api/export/reports/station",
+      "https://scale.rrseafood.com.ph/api/reports/daily-breakdown",
+      "https://scale.rrseafood.com.ph/api/users",
+      "https://scale.rrseafood.com.ph/api/classifications/__VAR__",
+      "https://scale.rrseafood.com.ph/api/weights",
+      "https://scale.rrseafood.com.ph/weights/recent",
+      "https://scale.rrseafood.com.ph/stations",
+      "https://scale.rrseafood.com.ph/api/dashboard/individual/__VAR__",
+      "https://scale.rrseafood.com.ph/reports/daily-breakdown",
+      "https://scale.rrseafood.com.ph/reports/comparison/category",
+      "https://scale.rrseafood.com.ph/api/scanner/session/__VAR__",
+      "https://scale.rrseafood.com.ph/scanner/session/",
+      "https://scale.rrseafood.com.ph/api/products/__VAR__",
+      "https://scale.rrseafood.com.ph/api/stations/__VAR__",
+      "https://scale.rrseafood.com.ph/export/reports/daily",
+      "https://scale.rrseafood.com.ph/api/products/categories",
+      "https://scale.rrseafood.com.ph/api/categories",
+      "https://scale.rrseafood.com.ph/api/scanner/session/code/__VAR__/weight",
+      "https://scale.rrseafood.com.ph/api/scanner/session/__VAR__/record",
+      "https://scale.rrseafood.com.ph/api/reports/paid-payroll",
+      "https://scale.rrseafood.com.ph/api/scale/test",
+      "https://scale.rrseafood.com.ph/users",
+      "https://scale.rrseafood.com.ph/api/products",
+      "https://scale.rrseafood.com.ph/api/export/reports/daily",
+      "https://scale.rrseafood.com.ph/auth/me",
+      "https://scale.rrseafood.com.ph/payroll/calculate-by-product?start_date=",
+      "https://scale.rrseafood.com.ph/api/auth/register",
+      "https://scale.rrseafood.com.ph/api/export/payroll/pdf",
+      "https://scale.rrseafood.com.ph/categories",
+      "https://scale.rrseafood.com.ph/api/reports/comparison/category",
+      "https://scale.rrseafood.com.ph/api/weights/recent",
+      "https://scale.rrseafood.com.ph/api/scale/read",
+      "https://scale.rrseafood.com.ph/reports/paid-payroll",
+      "https://scale.rrseafood.com.ph/api/product-prices",
+      "https://scale.rrseafood.com.ph/api/reports/comparison/station",
+      "https://scale.rrseafood.com.ph/api/auth/me",
+      "https://scale.rrseafood.com.ph/api/payroll/pay-all?start_date=__VAR__&end_date=__VAR__",
+      "https://scale.rrseafood.com.ph/api/users/__VAR__",
+      "https://scale.rrseafood.com.ph/weights",
+      "https://scale.rrseafood.com.ph/api/stations",
+      "https://scale.rrseafood.com.ph/api/employees/__VAR__",
+      "https://scale.rrseafood.com.ph/auth/login"
+    ],
+    "discovered_forms": []
+  },
+  "summary": {
+    "critical": 0,
+    "high": 3,
+    "medium": 4,
+    "low": 4
+  }
+}

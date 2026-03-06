@@ -1,0 +1,296 @@
+{
+  "meta": {
+    "project": "RMS - Record Management System",
+    "version": "1.0",
+    "description": "Structured test configuration derived from RMS_ENDPOINTS_AND_ROLES.md",
+    "notes": [
+      "Many /api/ endpoints render HTML (server-side), not pure JSON REST",
+      "DRF router endpoints may expose GET/POST/PUT/PATCH/DELETE",
+      "Some apps have empty urls.py (room, schedule, backup)"
+    ]
+  },
+  "base_url": "http://localhost:8000",
+  "roles": [
+    {"name": "Admin", "slug": "admin", "credential_source": "manual", "credentials": {"email": "admin@email.com", "username": "admin", "password": "123"}, "dashboard": "/administrator/"},
+    {"name": "Admission", "slug": "admission", "credential_source": "generated", "credentials": {}, "dashboard": "/admission/"},
+    {"name": "Pre Admission", "slug": "pre_admission", "credential_source": "generated", "credentials": {}, "dashboard": "/preadmission/"},
+    {"name": "Academic Director", "slug": "academic_director", "credential_source": "generated", "credentials": {}, "dashboard": "/academic_director/"},
+    {"name": "Program Head", "slug": "program_head", "credential_source": "generated", "credentials": {}, "dashboard": "/program_head/"},
+    {"name": "Registrar", "slug": "registrar", "credential_source": "generated", "credentials": {}, "dashboard": "/registrar/"},
+    {"name": "Teacher", "slug": "teacher", "credential_source": "generated", "credentials": {}, "dashboard": "/teacher/"},
+    {"name": "Cashier", "slug": "cashier", "credential_source": "generated", "credentials": {}, "dashboard": "/cashier/"},
+    {"name": "Finance", "slug": "finance", "credential_source": "generated", "credentials": {}, "dashboard": "/finance/"},
+    {"name": "Guidance", "slug": "guidance", "credential_source": "generated", "credentials": {}, "dashboard": "/guidance/"},
+    {"name": "Clinic", "slug": "clinic", "credential_source": "generated", "credentials": {}, "dashboard": "/clinic/"},
+    {"name": "IT Staff", "slug": "it_staff", "credential_source": "generated", "credentials": {}, "dashboard": "/it_staff/"},
+    {"name": "Scholarship Officer", "slug": "scholarship", "credential_source": "generated", "credentials": {}, "dashboard": "/scholarship/"},
+    {"name": "Librarian", "slug": "librarian", "credential_source": "generated", "credentials": {}, "dashboard": "/library/"}
+  ],
+  "authentication": {
+    "login_page": {"method": "GET", "path": "/", "type": "web", "description": "Login page"},
+    "login_submit": {"method": "POST", "path": "/", "type": "web", "description": "Login form submit", "form_fields": ["username", "password", "csrfmiddlewaretoken"]},
+    "logout": {"method": "POST", "path": "/logout/", "type": "web", "description": "Logout"},
+    "role_redirect": {"method": "GET", "path": "/role_based_redirect/", "type": "web", "description": "Redirect based on role"},
+    "check_email": {"method": "POST", "path": "/check_email_existence/", "type": "web", "description": "Check email for password reset"},
+    "verify_otp": {"method": "POST", "path": "/verify_otp/", "type": "web", "description": "Verify OTP for password reset"},
+    "reset_password": {"method": "POST", "path": "/reset_password/", "type": "web", "description": "Reset password"},
+    "change_password_verify": {"method": "POST", "path": "/change_password_verification/", "type": "web", "description": "Password change verification"},
+    "change_password_update": {"method": "POST", "path": "/change_password_update/", "type": "web", "description": "Update password"}
+  },
+  "api_endpoints": {
+    "monitoring": [
+      {"method": "GET", "path": "/api/monitor/", "type": "html", "description": "API monitor dashboard", "auth_required": true},
+      {"method": "GET", "path": "/api/key-status/", "type": "json", "description": "API key status", "auth_required": true, "auth_type": "api_key"},
+      {"method": "GET", "path": "/api/traffic-monitor/", "type": "html", "description": "Traffic monitoring", "auth_required": true}
+    ],
+    "academic": [
+      {"method": "GET", "path": "/api/academic-terms/", "type": "json", "description": "List academic terms", "auth_required": true, "is_router": false},
+      {"method": "GET", "path": "/api/academic-terms/active/", "type": "json", "description": "Active academic terms", "auth_required": true},
+      {"method": "GET", "path": "/api/academic-terms/1/", "type": "json", "description": "Academic term detail (pk=1)", "auth_required": true},
+      {"method": "GET", "path": "/api/program-head/", "type": "json", "description": "Program head departments", "auth_required": true},
+      {"method": "GET", "path": "/api/program-head/1/", "type": "json", "description": "Program head dept detail", "auth_required": true}
+    ],
+    "courses": [
+      {"method": "GET", "path": "/api/courses/", "type": "json", "description": "List courses", "auth_required": true},
+      {"method": "GET", "path": "/api/courses/1/", "type": "json", "description": "Course detail", "auth_required": true},
+      {"method": "GET", "path": "/api/course-subjects/", "type": "json", "description": "Course-subject mappings", "auth_required": true},
+      {"method": "GET", "path": "/api/course-subjects/1/", "type": "json", "description": "Course-subject detail", "auth_required": true},
+      {"method": "GET", "path": "/api/subjects/", "type": "json", "description": "List subjects", "auth_required": true},
+      {"method": "GET", "path": "/api/terms/", "type": "json", "description": "List terms", "auth_required": true},
+      {"method": "GET", "path": "/api/terms/1/", "type": "json", "description": "Term detail", "auth_required": true},
+      {"method": "GET", "path": "/api/class-schedules/", "type": "json", "description": "Class schedules", "auth_required": true},
+      {"method": "GET", "path": "/api/class-schedules/1/", "type": "json", "description": "Class schedule detail", "auth_required": true},
+      {"method": "GET", "path": "/api/grouped-class-schedules/", "type": "json", "description": "Grouped class schedules", "auth_required": true}
+    ],
+    "students": [
+      {"method": "GET", "path": "/api/students/", "type": "json", "description": "Student list", "auth_required": true, "sensitive": true},
+      {"method": "GET", "path": "/api/students/1/", "type": "json", "description": "Student detail", "auth_required": true, "sensitive": true},
+      {"method": "GET", "path": "/api/student-schedules/", "type": "json", "description": "Student schedules", "auth_required": true},
+      {"method": "GET", "path": "/api/student-schedules/1/", "type": "json", "description": "Student schedule detail", "auth_required": true},
+      {"method": "GET", "path": "/api/student-schedules/student/1/", "type": "json", "description": "Schedules for student", "auth_required": true},
+      {"method": "GET", "path": "/api/academic-history/", "type": "json", "description": "Academic history", "auth_required": true, "is_router": true},
+      {"method": "GET", "path": "/api/academic-history/1/", "type": "json", "description": "Academic history detail", "auth_required": true, "is_router": true}
+    ],
+    "teachers": [
+      {"method": "GET", "path": "/api/teachers/", "type": "json", "description": "Teacher list", "auth_required": true, "sensitive": true},
+      {"method": "GET", "path": "/api/teachers/1/", "type": "json", "description": "Teacher detail", "auth_required": true, "sensitive": true}
+    ],
+    "finance": [
+      {"method": "GET", "path": "/api/student-finances/", "type": "json", "description": "Finance list", "auth_required": true, "sensitive": true},
+      {"method": "GET", "path": "/api/student-finances/1/", "type": "json", "description": "Finance detail", "auth_required": true, "sensitive": true},
+      {"method": "GET", "path": "/api/student-finances/student/1/", "type": "json", "description": "Finance by student", "auth_required": true, "sensitive": true}
+    ],
+    "registrar": [
+      {"method": "GET", "path": "/api/grading-schedules/", "type": "json", "description": "Grading schedules", "auth_required": true, "is_router": true}
+    ],
+    "sync": [
+      {"method": "POST", "path": "/api/import_lms_grades/", "type": "json", "description": "LMS grade import", "auth_required": true, "destructive": true}
+    ],
+    "print": [
+      {"method": "GET", "path": "/api/print/exit-interview/1/html/", "type": "html", "description": "Exit interview HTML", "auth_required": true},
+      {"method": "GET", "path": "/api/print/exit-interview/1/pdf/", "type": "binary", "description": "Exit interview PDF", "auth_required": true}
+    ]
+  },
+  "web_endpoints": {
+    "academic_director": {
+      "prefix": "/academic_director",
+      "allowed_roles": ["Admin", "Academic Director"],
+      "endpoints": [
+        {"method": "GET", "path": "/academic_director/", "type": "web", "description": "Dashboard"},
+        {"method": "GET", "path": "/academic_director/academic_director_stats/", "type": "json", "description": "Dashboard stats"},
+        {"method": "GET", "path": "/academic_director/academic_director_enrollment_trends/", "type": "json", "description": "Enrollment trends"},
+        {"method": "GET", "path": "/academic_director/ad_grade_stats/", "type": "json", "description": "Grade stats"},
+        {"method": "GET", "path": "/academic_director/ad_subject_search/", "type": "json", "description": "Subject search"},
+        {"method": "GET", "path": "/academic_director/prospectus/", "type": "web", "description": "Prospectus list"},
+        {"method": "GET", "path": "/academic_director/prospectus/add/", "type": "web", "description": "Manage prospectus"},
+        {"method": "POST", "path": "/academic_director/prospectus/create/", "type": "json", "description": "Create prospectus", "destructive": true},
+        {"method": "POST", "path": "/academic_director/prospectus/update/", "type": "json", "description": "Update prospectus", "destructive": true},
+        {"method": "POST", "path": "/academic_director/prospectus/rename-template/", "type": "json", "description": "Rename template", "destructive": true},
+        {"method": "GET", "path": "/academic_director/prospectus/template-sources/", "type": "json", "description": "Template sources"},
+        {"method": "GET", "path": "/academic_director/prospectus/templates-for-term/", "type": "json", "description": "Templates for term"},
+        {"method": "GET", "path": "/academic_director/prospectus/templates-by-course/", "type": "json", "description": "Templates by course"},
+        {"method": "GET", "path": "/academic_director/prospectus/detail-for-year/", "type": "json", "description": "Prospectus detail for year"},
+        {"method": "POST", "path": "/academic_director/prospectus/delete-template/", "type": "json", "description": "Delete template", "destructive": true},
+        {"method": "GET", "path": "/academic_director/prospectus/enrolled-students/", "type": "json", "description": "Enrolled students"},
+        {"method": "POST", "path": "/academic_director/prospectus/assign-to-students/", "type": "json", "description": "Assign prospectus", "destructive": true},
+        {"method": "POST", "path": "/academic_director/prospectus/unassign-student/", "type": "json", "description": "Unassign student", "destructive": true},
+        {"method": "GET", "path": "/academic_director/manage_schedules/", "type": "web", "description": "Manage schedules"},
+        {"method": "GET", "path": "/academic_director/group_class_schedules/", "type": "web", "description": "Group class schedules"},
+        {"method": "POST", "path": "/academic_director/group_class_schedules/process/", "type": "json", "description": "Process grouping", "destructive": true},
+        {"method": "POST", "path": "/academic_director/ungroup_class_schedules/", "type": "json", "description": "Ungroup schedules", "destructive": true},
+        {"method": "POST", "path": "/academic_director/update_group_name/", "type": "json", "description": "Update group name", "destructive": true},
+        {"method": "GET", "path": "/academic_director/get_group_members/1/", "type": "json", "description": "Group members"},
+        {"method": "POST", "path": "/academic_director/remove_from_group/", "type": "json", "description": "Remove from group", "destructive": true},
+        {"method": "POST", "path": "/academic_director/add_to_group/", "type": "json", "description": "Add to group", "destructive": true},
+        {"method": "GET", "path": "/academic_director/get_available_schedules/1/", "type": "json", "description": "Available schedules"},
+        {"method": "GET", "path": "/academic_director/student_schedules/", "type": "web", "description": "Student schedules"},
+        {"method": "POST", "path": "/academic_director/add_student_schedule/1/", "type": "json", "description": "Add student schedule", "destructive": true},
+        {"method": "POST", "path": "/academic_director/unfinalize_student_subject/1/", "type": "json", "description": "Unfinalize subject", "destructive": true},
+        {"method": "POST", "path": "/academic_director/delete_student_schedule/1/", "type": "json", "description": "Delete student schedule", "destructive": true},
+        {"method": "GET", "path": "/academic_director/api/eligible_students/", "type": "json", "description": "Eligible students"},
+        {"method": "GET", "path": "/academic_director/manage_subjects/", "type": "web", "description": "Manage subjects"},
+        {"method": "GET", "path": "/academic_director/manage_teachers/", "type": "web", "description": "Manage teachers"},
+        {"method": "GET", "path": "/academic_director/manage_rooms/", "type": "web", "description": "Manage rooms"},
+        {"method": "GET", "path": "/academic_director/manage_academic_terms/", "type": "web", "description": "Manage academic terms"},
+        {"method": "GET", "path": "/academic_director/course/", "type": "web", "description": "Manage courses"}
+      ]
+    },
+    "program_head": {
+      "prefix": "/program_head",
+      "allowed_roles": ["Admin", "Program Head"],
+      "endpoints": [
+        {"method": "GET", "path": "/program_head/", "type": "web", "description": "Dashboard"},
+        {"method": "GET", "path": "/program_head/student_subjects/", "type": "web", "description": "Student subjects"},
+        {"method": "GET", "path": "/program_head/student-subjects-json/", "type": "json", "description": "Student subjects JSON"},
+        {"method": "GET", "path": "/program_head/student-subjects-json/1/", "type": "json", "description": "Student subject detail"},
+        {"method": "POST", "path": "/program_head/update_student_subject/", "type": "json", "description": "Update student subject", "destructive": true},
+        {"method": "GET", "path": "/program_head/prospectus/enrolled-students/", "type": "json", "description": "Enrolled students"},
+        {"method": "POST", "path": "/program_head/prospectus/assign-to-students/", "type": "json", "description": "Assign prospectus", "destructive": true},
+        {"method": "POST", "path": "/program_head/prospectus/unassign-student/", "type": "json", "description": "Unassign student", "destructive": true},
+        {"method": "GET", "path": "/program_head/get-target-schedules/", "type": "json", "description": "Target schedules for transfer"},
+        {"method": "POST", "path": "/program_head/check-transfer-conflicts/", "type": "json", "description": "Check transfer conflicts"},
+        {"method": "POST", "path": "/program_head/transfer-student-schedule/", "type": "json", "description": "Transfer student schedule", "destructive": true},
+        {"method": "POST", "path": "/program_head/bulk-transfer-students/", "type": "json", "description": "Bulk transfer students", "destructive": true}
+      ]
+    },
+    "registrar": {
+      "prefix": "/registrar",
+      "allowed_roles": ["Admin", "Registrar"],
+      "endpoints": [
+        {"method": "GET", "path": "/registrar/", "type": "web", "description": "Dashboard"}
+      ]
+    },
+    "admission": {
+      "prefix": "/admission",
+      "allowed_roles": ["Admin", "Admission"],
+      "endpoints": [
+        {"method": "GET", "path": "/admission/", "type": "web", "description": "Dashboard"},
+        {"method": "GET", "path": "/admission/api/daily-applications/", "type": "json", "description": "Daily applications chart"}
+      ]
+    },
+    "finance": {
+      "prefix": "/finance",
+      "allowed_roles": ["Admin", "Finance"],
+      "endpoints": [
+        {"method": "GET", "path": "/finance/finance_dashboard/", "type": "web", "description": "Finance dashboard"},
+        {"method": "GET", "path": "/finance/api/dashboard/stats/", "type": "json", "description": "Dashboard stats"},
+        {"method": "GET", "path": "/finance/api/dashboard/monthly-collections/", "type": "json", "description": "Monthly collections"},
+        {"method": "GET", "path": "/finance/api/dashboard/revenue-breakdown/", "type": "json", "description": "Revenue breakdown"},
+        {"method": "GET", "path": "/finance/api/dashboard/outstanding-balances/", "type": "json", "description": "Outstanding balances"},
+        {"method": "GET", "path": "/finance/api/dashboard/recent-payments/", "type": "json", "description": "Recent payments"}
+      ]
+    },
+    "cashier": {
+      "prefix": "/cashier",
+      "allowed_roles": ["Admin", "Cashier"],
+      "endpoints": [
+        {"method": "GET", "path": "/cashier/", "type": "web", "description": "Dashboard"},
+        {"method": "POST", "path": "/cashier/process_payment_ajax/", "type": "json", "description": "Process payment", "destructive": true},
+        {"method": "GET", "path": "/cashier/api/student/1/subjects/", "type": "json", "description": "Student subjects for cashier"}
+      ]
+    },
+    "teacher": {
+      "prefix": "/teacher",
+      "allowed_roles": ["Admin", "Teacher"],
+      "endpoints": [
+        {"method": "GET", "path": "/teacher/", "type": "web", "description": "Dashboard"},
+        {"method": "GET", "path": "/teacher/teacher_grade_stats/", "type": "json", "description": "Grade stats"},
+        {"method": "GET", "path": "/teacher/teacher_subject_performance/", "type": "json", "description": "Subject performance"}
+      ]
+    },
+    "guidance": {
+      "prefix": "/guidance",
+      "allowed_roles": ["Admin", "Guidance"],
+      "endpoints": [
+        {"method": "GET", "path": "/guidance/", "type": "web", "description": "Dashboard"}
+      ]
+    },
+    "clinic": {
+      "prefix": "/clinic",
+      "allowed_roles": ["Admin", "Clinic"],
+      "endpoints": [
+        {"method": "GET", "path": "/clinic/", "type": "web", "description": "Dashboard"}
+      ]
+    },
+    "it_staff": {
+      "prefix": "/it_staff",
+      "allowed_roles": ["Admin", "IT Staff"],
+      "endpoints": [
+        {"method": "GET", "path": "/it_staff/", "type": "web", "description": "Dashboard"}
+      ]
+    },
+    "scholarship": {
+      "prefix": "/scholarship",
+      "allowed_roles": ["Admin", "Scholarship Officer"],
+      "endpoints": [
+        {"method": "GET", "path": "/scholarship/", "type": "web", "description": "Dashboard"}
+      ]
+    },
+    "library": {
+      "prefix": "/library",
+      "allowed_roles": ["Admin", "Librarian"],
+      "endpoints": [
+        {"method": "GET", "path": "/library/", "type": "web", "description": "Dashboard"}
+      ]
+    },
+    "school": {
+      "prefix": "/school",
+      "allowed_roles": ["Admin"],
+      "endpoints": [
+        {"method": "GET", "path": "/school/", "type": "web", "description": "School settings"}
+      ]
+    }
+  },
+  "test_scenarios": {
+    "auth_bypass": {
+      "description": "Test accessing protected endpoints without authentication",
+      "test_unauthenticated_access": true,
+      "test_wrong_role_access": true
+    },
+    "csrf": {
+      "description": "Test CSRF token enforcement on POST endpoints",
+      "test_missing_csrf": true
+    },
+    "idor": {
+      "description": "Test Insecure Direct Object Reference by accessing other users resources",
+      "test_sequential_ids": [1, 2, 3, 999, 9999]
+    },
+    "input_validation": {
+      "description": "Test input validation on form fields",
+      "xss_payloads": ["<script>alert('XSS')</script>", "'\"><img src=x onerror=alert(1)>", "javascript:alert(1)"],
+      "sqli_payloads": ["' OR '1'='1", "\" OR \"1\"=\"1", "'; DROP TABLE users;--", "1' UNION SELECT NULL--"],
+      "path_traversal": ["../../../etc/passwd", "..\\..\\..\\windows\\system32\\config\\sam"]
+    },
+    "rate_limiting": {
+      "description": "Test rate limiting on login and sensitive endpoints",
+      "rapid_request_count": 20,
+      "target_endpoints": ["/", "/check_email_existence/", "/verify_otp/"]
+    },
+    "http_methods": {
+      "description": "Test unsupported HTTP methods on endpoints",
+      "methods_to_test": ["PUT", "DELETE", "PATCH", "OPTIONS", "TRACE"]
+    },
+    "navigation_patterns": {
+      "description": "Non-standard UI elements to handle during navigation",
+      "django_patterns": {
+        "csrf_token": "csrfmiddlewaretoken",
+        "login_form_selectors": ["form[method='post']", "#login-form", "form[action='/']"],
+        "common_selectors": {
+          "sidebar_nav": [".sidebar", "#sidebar", "nav.sidebar", ".side-nav", ".sidenav"],
+          "dropdown_menu": [".dropdown", ".dropdown-toggle", ".dropdown-menu"],
+          "modal_dialog": [".modal", ".modal-dialog", ".modal-content", "[data-bs-toggle='modal']", "[data-toggle='modal']"],
+          "data_tables": [".dataTables_wrapper", "#dataTable", "table.dataTable", ".table-responsive"],
+          "ajax_loader": [".loading", ".spinner", "#loading", ".preloader", "[data-loading]"],
+          "toast_alert": [".toast", ".alert", ".notification", ".swal2-container"],
+          "tab_panels": [".nav-tabs", ".tab-content", "[data-bs-toggle='tab']", "[data-toggle='tab']"],
+          "accordion": [".accordion", ".collapse", "[data-bs-toggle='collapse']"],
+          "select2": [".select2", ".select2-container", ".select2-selection"],
+          "datepicker": [".datepicker", ".daterangepicker", "[type='date']"],
+          "file_upload": ["input[type='file']", ".custom-file-input", ".dropzone"],
+          "search_input": ["input[type='search']", ".search-input", "#search", "[name='q']"],
+          "pagination": [".pagination", ".page-link", ".paginate_button"]
+        }
+      }
+    }
+  }
+}

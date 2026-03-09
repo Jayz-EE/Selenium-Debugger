@@ -24,15 +24,13 @@ from typing import Any, Dict, List, Optional, Tuple
 try:
     from selenium.webdriver.common.by import By
     from selenium.webdriver.common.keys import Keys
-    from selenium.webdriver.support.ui import Select, WebDriverWait
-    from selenium.webdriver.support import expected_conditions as EC
+    from selenium.webdriver.support.ui import Select
     from selenium.common.exceptions import (
         ElementNotInteractableException,
         InvalidSwitchToTargetException,
         NoSuchElementException,
         NoSuchFrameException,
         StaleElementReferenceException,
-        TimeoutException,
     )
 except ImportError:
     raise ImportError("Selenium is required.  Run: pip install selenium")
@@ -69,8 +67,7 @@ class UIControlDriver:
     """
 
     STALE_RETRIES  = 3
-    FIND_TIMEOUT   = 5      # seconds per strategy attempt
-    IFRAME_TIMEOUT = 1.5    # seconds when scanning inside an iframe
+    # No per-strategy timeout — strategies use instant find_elements (no hang)
 
     def __init__(
         self,
@@ -110,17 +107,75 @@ class UIControlDriver:
         self.logger.debug("[UICtrl] No ui_pattern.json found — heuristic-only mode")
         return None
 
-    def get_field_pattern(self, data_type: str) -> Optional[Dict]:
-        """Return the recorded field pattern for a given data_type string."""
+    def get_field_pattern(self, data_type: str,
+                           page_url: Optional[str] = None) -> Optional[Dict]:
+        """
+        Return the recorded field pattern for a given data_type string.
+        When page_url is provided, prefer fields whose recorded URL path
+        matches the current page — avoids pulling fields from other pages
+        that were recorded in the same session.
+        """
         if not self.pattern:
             return None
         fields = self.pattern.get("session_summary", {}).get("fields", {})
+
+        # Normalise the current page path for comparison
+        cur_path = ""
+        if page_url:
+            try:
+                from urllib.parse import urlparse
+                cur_path = urlparse(page_url).path.rstrip("/")
+            except Exception:
+                pass
+
+        best: Optional[Dict] = None
         for _k, fdata in fields.items():
-            if fdata.get("data_type", "").lower() == data_type.lower():
-                return fdata
-            if fdata.get("is_password") and data_type.lower() == "password":
-                return fdata
-        return None
+            dt  = fdata.get("data_type", "").lower()
+            pwd = fdata.get("is_password", False)
+            matched_type = (dt == data_type.lower()) or \
+                           (pwd and data_type.lower() == "password") or \
+                           (dt == "email" and data_type.lower() in ("username", "email"))
+            if not matched_type:
+                continue
+
+            # If we have a URL hint, prefer fields recorded on the same page
+            if cur_path:
+                rec_url = fdata.get("meta", {}).get("url", "") or \
+                          self._find_field_url_from_events(fdata)
+                try:
+                    from urllib.parse import urlparse
+                    rec_path = urlparse(rec_url).path.rstrip("/")
+                except Exception:
+                    rec_path = ""
+                if rec_path and rec_path == cur_path:
+                    return fdata          # exact page match — return immediately
+                # Keep as fallback but prefer a closer match
+                if best is None:
+                    best = fdata
+            else:
+                if best is None:
+                    best = fdata
+
+        return best
+
+    def _find_field_url_from_events(self, fdata: Dict) -> str:
+        """Return the URL where this field was recorded (fast path: page_url key)."""
+        # New recorder stores page_url directly on the field entry
+        if fdata.get("page_url"):
+            return fdata["page_url"]
+        # Fallback: scan raw_events for older pattern files that lack page_url
+        if not self.pattern:
+            return ""
+        target_id   = fdata.get("meta", {}).get("id", "")
+        target_name = fdata.get("meta", {}).get("name", "")
+        for ev in self.pattern.get("raw_events", []):
+            if ev.get("event_type") != "field_fill":
+                continue
+            m = ev.get("meta", {})
+            if (target_id  and m.get("id")   == target_id) or \
+               (target_name and m.get("name") == target_name):
+                return ev.get("url", "")
+        return ""
 
     def get_tab_order(self) -> List[str]:
         if not self.pattern:
@@ -213,7 +268,7 @@ class UIControlDriver:
         hints:        List[str],
         el_type:      str            = "input",
         pattern_meta: Optional[Dict] = None,
-        timeout:      Optional[float] = None,
+        timeout:      Optional[float] = None,   # kept for API compat
     ) -> Optional[Any]:
         """
         Multi-strategy element finder.
@@ -225,18 +280,23 @@ class UIControlDriver:
           3. XPath label-based lookup
           4. Generic type fallbacks
         """
-        t = timeout or self.FIND_TIMEOUT
         strategies = self._build_strategies(hints, el_type, pattern_meta)
 
-        # Phase 1 — main document
-        el = self._try_strategies(strategies, t)
+        # Phase 1 — main document (instant, no timeout burn)
+        el = self._try_strategies(strategies)
+        if el:
+            return el
+
+        # Brief wait and retry once — handles slow-rendering SPAs
+        time.sleep(1.5)
+        el = self._try_strategies(strategies)
         if el:
             return el
 
         # Phase 2 — iframes
         self.logger.debug(f"[UICtrl] {hints} not in main frame — scanning iframes…")
         def _in_iframe():
-            return self._try_strategies(strategies, self.IFRAME_TIMEOUT)
+            return self._try_strategies(strategies)
         el = self._scan_iframes(_in_iframe)
         if el:
             return el
@@ -286,26 +346,40 @@ class UIControlDriver:
         if el_type == "input":
             if any("pass" in h.lower() for h in hints):
                 strategies.append(("fb:password", By.CSS_SELECTOR, "input[type='password']"))
-            for itype in ("email", "text"):
-                strategies.append((f"fb:type={itype}", By.CSS_SELECTOR, f"input[type='{itype}']"))
+            # email-type inputs are valid username fields on many systems
+            is_user_field = any(h in ("username", "email", "user", "login", "id", "account")
+                                for h in hints)
+            if is_user_field:
+                strategies.append(("fb:type=email", By.CSS_SELECTOR, "input[type='email']"))
+            strategies.append(("fb:type=text", By.CSS_SELECTOR, "input[type='text']"))
 
         return strategies
 
     def _try_strategies(
         self,
         strategies: List[Tuple[str, str, str]],
-        timeout:    float,
+        timeout:    float = 0,   # kept for API compat, no longer used
     ) -> Optional[Any]:
+        """
+        Iterate strategies using instant find_elements (no per-strategy wait).
+        This eliminates the N×timeout hang when many strategies are tried.
+        A single short implicit wait is set on the driver before calling,
+        so the first strategy that matches a just-rendered element still works.
+        """
+        seen: set = set()
         for desc, by, selector in strategies:
+            if (by, selector) in seen:
+                continue
+            seen.add((by, selector))
             try:
-                el = WebDriverWait(self.driver, timeout).until(
-                    EC.presence_of_element_located((by, selector))
-                )
-                if el and el.is_displayed():
-                    self.logger.debug(f"[UICtrl] Found via {desc}: {selector!r}")
-                    return el
-            except (TimeoutException, NoSuchElementException):
-                pass
+                els = self.driver.find_elements(by, selector)
+                for el in els:
+                    try:
+                        if el.is_displayed():
+                            self.logger.debug(f"[UICtrl] Found via {desc}: {selector!r}")
+                            return el
+                    except Exception:
+                        continue
             except Exception as e:
                 self.logger.debug(f"[UICtrl] Strategy {desc} error: {e}")
         return None
@@ -471,9 +545,30 @@ class UIControlDriver:
         def _find():
             for by, sel in selectors:
                 try:
-                    el = self.driver.find_element(by, sel)
-                    if el.is_displayed():
-                        return el
+                    elements = self.driver.find_elements(by, sel)
+                    for el in elements:
+                        try:
+                            if not el.is_displayed():
+                                continue
+                            text = (el.text or "").strip().lower()
+                            aria = (el.get_attribute("aria-label") or "").strip().lower()
+                            value = (el.get_attribute("value") or "").strip().lower()
+                            kind = " ".join(filter(None, [text, aria, value]))
+                            if kind and any(k in kind for k in ["login", "log in", "sign in"]):
+                                return el
+                        except Exception:
+                            continue
+                except Exception:
+                    pass
+            for by, sel in selectors:
+                try:
+                    elements = self.driver.find_elements(by, sel)
+                    for el in elements:
+                        try:
+                            if el.is_displayed():
+                                return el
+                        except Exception:
+                            continue
                 except Exception:
                     pass
             return None
@@ -483,6 +578,50 @@ class UIControlDriver:
             return el
 
         return self._scan_iframes(_find)
+
+    def _expand_login_ui(self) -> None:
+        """
+        Expand common hidden login containers before locating fields.
+        RMS keeps the admin login form inside a collapsed Bootstrap panel.
+        """
+        selectors = [
+            (By.CSS_SELECTOR, "a[href='#collapseExample'][data-bs-toggle='collapse']"),
+            (By.CSS_SELECTOR, "[data-bs-target='#collapseExample']"),
+            (By.XPATH, "//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'log in here')]"),
+            (By.XPATH, "//a[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'login here')]"),
+            (By.XPATH, "//button[contains(translate(normalize-space(.),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'log in')]"),
+        ]
+
+        try:
+            panel = self.driver.find_elements(By.CSS_SELECTOR, "#collapseExample")
+            if panel:
+                classes = (panel[0].get_attribute("class") or "").lower()
+                expanded = "show" in classes
+                if expanded:
+                    return
+        except Exception:
+            pass
+
+        for by, sel in selectors:
+            try:
+                for el in self.driver.find_elements(by, sel):
+                    try:
+                        if not el.is_displayed():
+                            continue
+                        self.logger.debug(f"[UICtrl] Expanding login UI via {sel!r}")
+                        self.driver.execute_script(
+                            "arguments[0].scrollIntoView({block:'center',inline:'nearest'});", el
+                        )
+                        try:
+                            el.click()
+                        except Exception:
+                            self.driver.execute_script("arguments[0].click();", el)
+                        time.sleep(0.8)
+                        return
+                    except Exception:
+                        continue
+            except Exception:
+                continue
 
     # ── High-level login ──────────────────────────────────────────────────────
 
@@ -508,9 +647,13 @@ class UIControlDriver:
                 self.logger.error(f"[UICtrl] Navigation failed: {e}")
                 return False
 
-        # Pull recorded patterns
-        user_pat = self.get_field_pattern("username") or self.get_field_pattern("email")
-        pass_pat = self.get_field_pattern("password")
+        self._expand_login_ui()
+
+        # Pull recorded patterns — scope to current page URL to avoid cross-page pollution
+        cur_url  = self.driver.current_url
+        user_pat = (self.get_field_pattern("username", cur_url) or
+                    self.get_field_pattern("email",    cur_url))
+        pass_pat = self.get_field_pattern("password", cur_url)
 
         # ── Locate username field
         user_el = self.fuzzy_find(

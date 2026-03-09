@@ -20,6 +20,7 @@ from datetime import datetime
 
 try:
     from selenium import webdriver
+    from selenium.common.exceptions import InvalidSessionIdException, WebDriverException
     from selenium.webdriver.chrome.options import Options as ChromeOptions
     from selenium.webdriver.chrome.service import Service as ChromeService
     from selenium.webdriver.firefox.options import Options as FirefoxOptions
@@ -268,12 +269,16 @@ def _build_session_summary(events: list) -> dict:
     submits = [e for e in events if e.get("is_submit")]
 
     # Build per-field map keyed by best available identifier
+    # Use FIRST fill per field (preserves login-page entry over later same-name fields)
     fields: dict = {}
     for ev in fills:
         m = ev.get("meta", {})
         key = m.get("name") or m.get("id") or m.get("placeholder") or m.get("css_selector", "unknown")
+        if key in fields:
+            continue  # keep first occurrence (login page comes before inner pages)
         fields[key] = {
             "meta":         m,
+            "page_url":     ev.get("url", ""),   # URL of the page where this field was filled
             "data_type":    ev.get("data_type", "text"),
             "is_password":  ev.get("is_password", False),
             "value_length": ev.get("value_length", 0),
@@ -306,6 +311,17 @@ def _build_session_summary(events: list) -> dict:
 #  Main recording loop
 # ─────────────────────────────────────────────────────────────────────────────
 
+def _driver_is_alive(driver) -> bool:
+    try:
+        if not getattr(driver, "session_id", None):
+            return False
+        driver.window_handles
+        return True
+    except (InvalidSessionIdException, WebDriverException):
+        return False
+    except Exception:
+        return True
+
 def record(url: str, output: str, browser: str, poll: float) -> None:
     print(f"[*] Launching {browser}  →  {url}")
     print("[*] Interact with the page normally.")
@@ -319,14 +335,29 @@ def record(url: str, output: str, browser: str, poll: float) -> None:
     all_events: list = []
     last_url         = driver.current_url
     session_start    = datetime.now().isoformat()
+    transient_failures = 0
 
     try:
         while True:
             time.sleep(poll)
             try:
                 cur = driver.current_url
+                transient_failures = 0
+            except (InvalidSessionIdException, WebDriverException):
+                transient_failures += 1
+                if not _driver_is_alive(driver):
+                    print("\n[*] Browser session closed.")
+                    break
+                if transient_failures >= 10:
+                    print("\n[!] Recorder lost contact with the page repeatedly; preserving captured events.")
+                    break
+                continue
             except Exception:
-                break  # Browser closed
+                transient_failures += 1
+                if transient_failures >= 10 and not _driver_is_alive(driver):
+                    print("\n[*] Browser session closed.")
+                    break
+                continue
 
             # Re-inject on navigation
             if cur != last_url:

@@ -453,6 +453,17 @@ For issues or questions:
   - Color-coded terminal output
   - Non-destructive testing approach
 
+# Record your login session first
+python3 rms_pattern_recorder.py --url http://test.localhost:8000
+
+# Then run the auditor with the pattern
+python3 rms_autonomous_agent.py --url http://test.localhost:8000 --pattern ui_pattern.json
+
+# With visual debug (red border on each element)
+python3 rms_autonomous_agent.py --url http://test.localhost:8000 --pattern ui_pattern.json --visual-debug
+
 ---
 
 **Remember**: Always obtain proper authorization before testing any website. Unauthorized security testing may violate laws and terms of service.
+
+
